@@ -12,11 +12,12 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/note_data"
+            <EditText
+                android:id="@+id/editTextArea"
                 android:padding="10dp"
                 android:textSize="16sp"
                 android:text="Demonstração de item"
+                android:gravity="top"
                 style="@style/TextAppearance.Compat.Notification.Title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -35,4 +36,13 @@
             />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="30dp"
+        android:src="@drawable/ic_baseline_save_24"
+    />
 </RelativeLayout>
