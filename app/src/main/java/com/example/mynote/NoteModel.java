@@ -5,6 +5,10 @@ public class NoteModel {
     String note_data;
     String created_at;
 
+    public NoteModel() {
+
+    }
+
     public NoteModel(String id, String note_data, String created_at) {
         this.id = id;
         this.note_data = note_data;

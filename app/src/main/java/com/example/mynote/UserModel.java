@@ -1,12 +1,19 @@
     package com.example.mynote;
 
-    import java.util.List;
-
     public class UserModel {
     String id;
     String email;
     String password;
-    List<NoteModel> noteModelList;
+
+        public UserModel() {
+
+        }
+
+        public UserModel(String id, String email, String password) {
+            this.id = id;
+            this.email = email;
+            this.password = password;
+        }
 
         public String getId() {
             return id;
@@ -30,13 +37,5 @@
 
         public void setPassword(String password) {
             this.password = password;
-        }
-
-        public List<NoteModel> getNoteModelList() {
-            return noteModelList;
-        }
-
-        public void setNoteModelList(List<NoteModel> noteModelList) {
-            this.noteModelList = noteModelList;
         }
     }
