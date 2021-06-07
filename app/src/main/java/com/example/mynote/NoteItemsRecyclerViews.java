@@ -49,7 +49,7 @@ public class NoteItemsRecyclerViews extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         NoteViewHolder noteViewHolder = (NoteViewHolder) holder;
         noteViewHolder.txtNote.setText(noteModelList.get(position).getNote_data());
         noteViewHolder.txtCreateTime.setText(noteModelList.get(position).getCreated_at());
