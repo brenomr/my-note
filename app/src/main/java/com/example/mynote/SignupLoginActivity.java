@@ -98,7 +98,8 @@ public class SignupLoginActivity extends AppCompatActivity {
                 }
 
                 else {
-                    CreateNewUser(email, password);
+                    loadingProgressBar.setVisibility(View.GONE);
+                    Toast.makeText(SignupLoginActivity.this,"Usuário não existe, crie uma conta.", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -109,15 +110,7 @@ public class SignupLoginActivity extends AppCompatActivity {
         });
     }
 
-    private void CreateNewUser(String email, String password) {
-
-        String id = userDatabase.push().getKey();
-
-        UserModel userModel = new UserModel(id, email, password);
-
-        userDatabase.child(email).setValue(userModel);
-        StaticUtils.StoreLoggedEmail(SignupLoginActivity.this, email);
-        startActivity(new Intent(SignupLoginActivity.this, MainActivity.class));
-        finish();
+    public void CreateNewUser(View v) {
+        startActivity(new Intent(SignupLoginActivity.this, SignInActivity.class));
     }
 }

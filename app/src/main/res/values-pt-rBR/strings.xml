@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="varTituloCadastro">Cadastro</string>
+    <string name="varUsuario">Usuário</string>
+    <string name="varCadastroSenha">Senha</string>
+    <string name="varCadastroUsuario">Usuário</string>
+    <string name="varCadUsuario">Insira nome de usuário</string>
+    <string name="varCadSenha">Insira uma senha</string>
+    <string name="varInpUsuario">Insira um nome de usuário</string>
+    <string name="varBtnCadastrar">Cadastrar</string>
+    <string name="varLogin">Acessar</string>
+    <string name="varBtnCadastro">Criar conta</string>
+</resources>
