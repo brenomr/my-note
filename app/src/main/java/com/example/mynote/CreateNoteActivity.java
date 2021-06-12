@@ -11,7 +11,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class CreateNoteActivity extends AppCompatActivity {
 
@@ -32,9 +34,15 @@ public class CreateNoteActivity extends AppCompatActivity {
     }
 
     private void saveNotes(String note) {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(StaticUtils.getUserEmail(CreateNoteActivity.this)).child("noteModelList");
+        /* Sou um horário formatado! */
+        Date agora = new Date();
+        SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        fmt.setTimeZone(TimeZone.getTimeZone("America/Sao_Paulo"));
+        String data = fmt.format(agora);
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(StaticUtils.getUsername(CreateNoteActivity.this)).child("noteModelList");
         String id = databaseReference.push().getKey();
-        NoteModel noteModel = new NoteModel(id, note, new Date().toString());
+        NoteModel noteModel = new NoteModel(id, note, data.toString());
         databaseReference.child(id).setValue(noteModel);
         startActivity(new Intent(CreateNoteActivity.this, MainActivity.class));
     }
