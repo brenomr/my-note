@@ -36,7 +36,7 @@ public class SignupLoginActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        mudarIdioma();
+        carregarIdioma();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_login);
         getSupportActionBar().hide();
@@ -47,7 +47,7 @@ public class SignupLoginActivity extends AppCompatActivity {
         final Button loginButton = findViewById(R.id.btnAcessar);
         loadingProgressBar = findViewById(R.id.loading);
 
-        checkAlreadyLoggedIn();
+        checarLogin();
 
         loginButton.setOnClickListener((v) -> {
             if(usernameEditText.getText().toString().isEmpty()){
@@ -66,7 +66,7 @@ public class SignupLoginActivity extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public void mudarIdioma() {
+    public void carregarIdioma() {
 
         SharedPreferences dados = getSharedPreferences("MyPref", MODE_PRIVATE);
         idioma = dados.getString("idioma", "pt");
@@ -82,24 +82,22 @@ public class SignupLoginActivity extends AppCompatActivity {
         res.updateConfiguration(config, res.getDisplayMetrics());
     }
 
-    private void checkAlreadyLoggedIn() {
-        if(StaticUtils.getUserEmail(SignupLoginActivity.this) != null) {
+    private void checarLogin() {
+        if(StaticUtils.getUsername(SignupLoginActivity.this) != null) {
             startActivity(new Intent(SignupLoginActivity.this, MainActivity.class));
             finish();
         }
     }
 
-    private void ProcessLogin(final String email, final String password) {
-        userDatabase.child(email).addValueEventListener(new ValueEventListener() {
+    private void ProcessLogin(String username, String password) {
+        userDatabase.child(username).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()) {
-                    String username1 = dataSnapshot.child("email").getValue(String.class);
-                    String password1 = dataSnapshot.child("password").getValue(String.class);
-                    String created = dataSnapshot.child("created_at").getValue(String.class);
-                    if(password1.equalsIgnoreCase(password)) {
+                    String storedPass = dataSnapshot.child("password").getValue(String.class);
+                    if(storedPass.equalsIgnoreCase(password)) {
                         loadingProgressBar.setVisibility(View.GONE);
-                        StaticUtils.StoreLoggedEmail(SignupLoginActivity.this, email);
+                        StaticUtils.storeLoggedUsername(SignupLoginActivity.this, username);
                         startActivity(new Intent(SignupLoginActivity.this, MainActivity.class));
                         finish();
                     }
@@ -108,7 +106,6 @@ public class SignupLoginActivity extends AppCompatActivity {
                         Toast.makeText(SignupLoginActivity.this,"Email ou senha inválidos.", Toast.LENGTH_SHORT).show();
                     }
                 }
-
                 else {
                     loadingProgressBar.setVisibility(View.GONE);
                     Toast.makeText(SignupLoginActivity.this,"Usuário não existe, crie uma conta.", Toast.LENGTH_SHORT).show();
@@ -117,7 +114,7 @@ public class SignupLoginActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Toast.makeText(SignupLoginActivity.this,"Erro ao acessar o banco.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -128,29 +125,21 @@ public class SignupLoginActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void idiomaPT(View v) {
-        idioma = "pt";
-
-        Locale lang = new Locale(idioma);
-        Locale.setDefault(lang);
-
-        Context context = SignupLoginActivity.this;
-        Resources res = context.getResources();
-        Configuration config = new Configuration(res.getConfiguration());
-
-        config.setLocale(lang);
-
-        res.updateConfiguration(config, res.getDisplayMetrics());
-
-        SharedPreferences.Editor dados = getSharedPreferences("MyPref", MODE_PRIVATE).edit();
-        dados.putString("idioma", idioma);
-        dados.apply();
-        recreate();
+        setIdioma("pt");
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void idiomaEN(View v) {
-        idioma = "en";
+        setIdioma("en");
+    }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public void idiomaES(View v) {
+        setIdioma("es");
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public void setIdioma(String idioma) {
         Locale lang = new Locale(idioma);
         Locale.setDefault(lang);
 
@@ -159,31 +148,12 @@ public class SignupLoginActivity extends AppCompatActivity {
         Configuration config = new Configuration(res.getConfiguration());
 
         config.setLocale(lang);
+
         res.updateConfiguration(config, res.getDisplayMetrics());
 
         SharedPreferences.Editor dados = getSharedPreferences("MyPref", MODE_PRIVATE).edit();
         dados.putString("idioma", idioma);
         dados.apply();
-        recreate();
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public void idiomaES(View v) {
-        idioma = "es";
-
-        Locale lang = new Locale(idioma);
-        Locale.setDefault(lang);
-
-        Context context = SignupLoginActivity.this;
-        Resources res = context.getResources();
-        Configuration config = new Configuration(res.getConfiguration());
-
-        config.setLocale(lang);
-        res.updateConfiguration(config, res.getDisplayMetrics());
-
-        SharedPreferences.Editor dados = getSharedPreferences("MyPref", MODE_PRIVATE).edit();
-        dados.putString("idioma", idioma);
-        dados.commit();
         recreate();
     }
 }

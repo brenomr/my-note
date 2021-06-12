@@ -36,7 +36,7 @@ public class ViewNoteDataActivity extends AppCompatActivity {
     }
 
     private void deleteNote() {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(StaticUtils.getUserEmail(ViewNoteDataActivity.this)).child("noteModelList").child(id);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(StaticUtils.getUsername(ViewNoteDataActivity.this)).child("noteModelList").child(id);
         databaseReference.removeValue();
         startActivity(new Intent(ViewNoteDataActivity.this, MainActivity.class));
     }
@@ -65,9 +65,9 @@ public class ViewNoteDataActivity extends AppCompatActivity {
         note_time.setText(create_time);
     }
 
-    private void saveNotes(String id, String toString) {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(StaticUtils.getUserEmail(ViewNoteDataActivity.this)).child("noteModelList");
-        NoteModel noteModel = new NoteModel(id, toString, new Date().toString());
+    private void saveNotes(String id, String note) {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(StaticUtils.getUsername(ViewNoteDataActivity.this)).child("noteModelList");
+        NoteModel noteModel = new NoteModel(id, note, new Date().toString());
         databaseReference.child(id).setValue(noteModel);
         startActivity(new Intent(ViewNoteDataActivity.this, MainActivity.class));
     }

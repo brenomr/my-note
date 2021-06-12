@@ -12,14 +12,14 @@
         app:cardCornerRadius="10dp">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="95dp">
             <TextView
                 android:id="@+id/txtNote"
                 android:padding="10dp"
                 android:text="Título Demonstração"
                 android:textColor="#ffffff"
                 android:layout_marginBottom="15dp"
-                android:maxLines="2"
+                android:maxLines="3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/TextAppearance.Compat.Notification.Title"/>

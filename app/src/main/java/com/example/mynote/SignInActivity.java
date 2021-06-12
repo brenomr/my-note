@@ -31,12 +31,12 @@ public class SignInActivity extends AppCompatActivity {
 
         registerButton.setOnClickListener((v) -> {
             if(usernameEditText.getText().toString().isEmpty()){
-                usernameEditText.setError("Informe seu e-mail.");
+                usernameEditText.setError("Informe um nome de usuário.");
                 usernameEditText.requestFocus();
                 return;
             }
             if(passwordEditText.getText().toString().isEmpty()){
-                passwordEditText.setError("Informe sua senha.");
+                passwordEditText.setError("Informe uma senha.");
                 passwordEditText.requestFocus();
                 return;
             }
@@ -44,37 +44,25 @@ public class SignInActivity extends AppCompatActivity {
         });
     }
 
-    private void CreateNewUser(String email, String password) {
-        userDatabase.child(email).addValueEventListener(new ValueEventListener() {
+    private void CreateNewUser(String username, String password) {
+        userDatabase.child(username).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(!dataSnapshot.exists()) {
                     String id = userDatabase.push().getKey();
-                    UserModel userModel = new UserModel(id, email, password);
-                    userDatabase.child(email).setValue(userModel);
+                    UserModel userModel = new UserModel(id, username, password);
+                    userDatabase.child(username).setValue(userModel);
                     finish();
                 }
                 else {
                     Toast.makeText(SignInActivity.this, "Nome de usuário já está em uso.", Toast.LENGTH_SHORT).show();
                 }
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Toast.makeText(SignInActivity.this,"Erro ao acessar o banco.", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-    /* private void CreateNewUser(String email, String password) {
-
-        String id = userDatabase.push().getKey();
-
-        UserModel userModel = new UserModel(id, email, password);
-
-        userDatabase.child(email).setValue(userModel);
-        StaticUtils.StoreLoggedEmail(SignInActivity.this, email);
-        finish();
-    } */
 }
