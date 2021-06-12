@@ -3,11 +3,15 @@
     <string name="varTituloCadastro">Cadastro</string>
     <string name="varUsuario">Usuário</string>
     <string name="varCadastroSenha">Senha</string>
-    <string name="varCadastroUsuario">Usuário</string>
-    <string name="varCadUsuario">Insira nome de usuário</string>
-    <string name="varCadSenha">Insira uma senha</string>
     <string name="varInpUsuario">Insira um nome de usuário</string>
     <string name="varBtnCadastrar">Cadastrar</string>
     <string name="varLogin">Acessar</string>
     <string name="varBtnCadastro">Criar conta</string>
+    <string name="varBoasVindas">Bem vindo ao MyNote!</string>
+    <string name="varDicaUsername">Usuário</string>
+    <string name="varDicaSenha">Senha</string>
+    <string name="app_name">MyNote</string>
+    <string name="action_sign_in_short">Login</string>
+    <string name="varInpSenha">Insira uma senha</string>
+    <string name="todo">BR</string>
 </resources>

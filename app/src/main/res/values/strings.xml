@@ -1,24 +1,16 @@
 <resources>
     <string name="app_name">MyNote</string>
-    <string name="title_activity_signup_login">SignupLoginActivity</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
-    <string name="varCadastroTitulo" />
+    <string name="action_sign_in_short">Login</string>
     <string name="varTituloCadastro">Cadastro</string>
     <string name="varUsuario">Usuário</string>
     <string name="varCadastroSenha">Senha</string>
-    <string name="varCadastroUsuario">Usuário</string>
-    <string name="varCadUsuario">Insira nome de usuário</string>
-    <string name="varCadSenha">Insira uma senha</string>
     <string name="varInpUsuario">Insira um nome de usuário</string>
     <string name="varInpSenha">Insira uma senha</string>
     <string name="varBtnCadastrar">Cadastrar</string>
     <string name="varLogin">Acessar</string>
     <string name="varBtnCadastro">Criar conta</string>
+    <string name="varBoasVindas">Bem vindo ao MyNote!</string>
+    <string name="varDicaUsername">Usuário</string>
+    <string name="varDicaSenha">Senha</string>
+    <string name="todo">TODO</string>
 </resources>

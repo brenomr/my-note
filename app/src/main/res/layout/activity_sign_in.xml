@@ -47,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtCadUsuario" />
 
     <EditText
-        android:id="@+id/inpCadUsuario"
+        android:id="@+id/edtCadUsuario"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -62,7 +62,7 @@
         app:layout_constraintStart_toEndOf="@+id/txtCadUsuario" />
 
     <EditText
-        android:id="@+id/inpCadSenha"
+        android:id="@+id/edtCadSenha"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"

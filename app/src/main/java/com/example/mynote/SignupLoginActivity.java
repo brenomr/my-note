@@ -1,55 +1,50 @@
 package com.example.mynote;
 
-import android.app.Activity;
-
 import androidx.annotation.NonNull;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mynote.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.Locale;
 
 public class SignupLoginActivity extends AppCompatActivity {
 
     DatabaseReference userDatabase;
     private ProgressBar loadingProgressBar;
+    String idioma = "pt";
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        mudarIdioma();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_login);
         getSupportActionBar().hide();
         userDatabase = FirebaseDatabase.getInstance().getReference("users");
 
-        final EditText usernameEditText = findViewById(R.id.username);
-        final EditText passwordEditText = findViewById(R.id.password);
-        final Button loginButton = findViewById(R.id.login);
+        final EditText usernameEditText = findViewById(R.id.edtUsername);
+        final EditText passwordEditText = findViewById(R.id.edtPassword);
+        final Button loginButton = findViewById(R.id.btnAcessar);
         loadingProgressBar = findViewById(R.id.loading);
 
         checkAlreadyLoggedIn();
@@ -68,6 +63,23 @@ public class SignupLoginActivity extends AppCompatActivity {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 ProcessLogin(usernameEditText.getText().toString(), passwordEditText.getText().toString());
         });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public void mudarIdioma() {
+
+        SharedPreferences dados = getSharedPreferences("MyPref", MODE_PRIVATE);
+        idioma = dados.getString("idioma", "pt");
+
+        Locale lang = new Locale(idioma);
+        Locale.setDefault(lang);
+
+        Context context = this;
+        Resources res = context.getResources();
+        Configuration config = new Configuration(res.getConfiguration());
+
+        config.setLocale(lang);
+        res.updateConfiguration(config, res.getDisplayMetrics());
     }
 
     private void checkAlreadyLoggedIn() {
@@ -112,5 +124,66 @@ public class SignupLoginActivity extends AppCompatActivity {
 
     public void CreateNewUser(View v) {
         startActivity(new Intent(SignupLoginActivity.this, SignInActivity.class));
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public void idiomaPT(View v) {
+        idioma = "pt";
+
+        Locale lang = new Locale(idioma);
+        Locale.setDefault(lang);
+
+        Context context = SignupLoginActivity.this;
+        Resources res = context.getResources();
+        Configuration config = new Configuration(res.getConfiguration());
+
+        config.setLocale(lang);
+
+        res.updateConfiguration(config, res.getDisplayMetrics());
+
+        SharedPreferences.Editor dados = getSharedPreferences("MyPref", MODE_PRIVATE).edit();
+        dados.putString("idioma", idioma);
+        dados.apply();
+        recreate();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public void idiomaEN(View v) {
+        idioma = "en";
+
+        Locale lang = new Locale(idioma);
+        Locale.setDefault(lang);
+
+        Context context = SignupLoginActivity.this;
+        Resources res = context.getResources();
+        Configuration config = new Configuration(res.getConfiguration());
+
+        config.setLocale(lang);
+        res.updateConfiguration(config, res.getDisplayMetrics());
+
+        SharedPreferences.Editor dados = getSharedPreferences("MyPref", MODE_PRIVATE).edit();
+        dados.putString("idioma", idioma);
+        dados.apply();
+        recreate();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public void idiomaES(View v) {
+        idioma = "es";
+
+        Locale lang = new Locale(idioma);
+        Locale.setDefault(lang);
+
+        Context context = SignupLoginActivity.this;
+        Resources res = context.getResources();
+        Configuration config = new Configuration(res.getConfiguration());
+
+        config.setLocale(lang);
+        res.updateConfiguration(config, res.getDisplayMetrics());
+
+        SharedPreferences.Editor dados = getSharedPreferences("MyPref", MODE_PRIVATE).edit();
+        dados.putString("idioma", idioma);
+        dados.commit();
+        recreate();
     }
 }

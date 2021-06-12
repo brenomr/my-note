@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyNote</string>
+    <string name="action_sign_in_short">Login</string>
+    <string name="varTituloCadastro">Register</string>
+    <string name="varUsuario">User</string>
+    <string name="varCadastroSenha">Password</string>
+    <string name="varInpUsuario">Insert an username</string>
+    <string name="varInpSenha">Insert a password</string>
+    <string name="varBtnCadastrar">Register</string>
+    <string name="varLogin">Login</string>
+    <string name="varBtnCadastro">Create an account</string>
+    <string name="varBoasVindas">Welcome to MyNote</string>
+    <string name="varDicaUsername">User</string>
+    <string name="varDicaSenha">Password</string>
+    <string name="todo">US</string>
+</resources>
