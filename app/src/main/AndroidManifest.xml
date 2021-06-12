@@ -11,18 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyNote">
-        <activity android:name=".CreateNoteActivity"></activity>
+        <activity android:name=".SignInActivity"></activity>
+        <activity android:name=".CreateNoteActivity" />
         <activity android:name=".ViewNoteDataActivity" />
         <activity
             android:name=".SignupLoginActivity"
-            android:label="@string/title_activity_signup_login">
+            android:label="MyNote">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
