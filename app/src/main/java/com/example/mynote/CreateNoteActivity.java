@@ -42,7 +42,7 @@ public class CreateNoteActivity extends AppCompatActivity {
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(StaticUtils.getUsername(CreateNoteActivity.this)).child("noteModelList");
         String id = databaseReference.push().getKey();
-        NoteModel noteModel = new NoteModel(id, note, data.toString());
+        NoteModel noteModel = new NoteModel(id, note, data);
         databaseReference.child(id).setValue(noteModel);
         startActivity(new Intent(CreateNoteActivity.this, MainActivity.class));
     }

@@ -46,17 +46,23 @@ public class SignInActivity extends AppCompatActivity {
 
     private void CreateNewUser(String username, String password) {
         userDatabase.child(username).addValueEventListener(new ValueEventListener() {
+            Boolean created = false;
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(!dataSnapshot.exists()) {
                     String id = userDatabase.push().getKey();
                     UserModel userModel = new UserModel(id, username, password);
                     userDatabase.child(username).setValue(userModel);
-                    finish();
+                    Toast.makeText(SignInActivity.this, "Conta criada!", Toast.LENGTH_SHORT).show();
+                    created = true;
                 }
                 else {
-                    Toast.makeText(SignInActivity.this, "Nome de usuário já está em uso.", Toast.LENGTH_SHORT).show();
+                    if(!created) {
+                        Toast.makeText(SignInActivity.this, "Nome de usuário já está em uso.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 }
+                finish();
             }
 
             @Override
